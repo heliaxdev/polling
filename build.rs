@@ -15,7 +15,8 @@ fn main() {
     // allows us to treat the current Rust version as the
     // latest stable version, for when version information
     // isn't available.
-    if !cfg.probe_rustc_version(1, 63) {
+    let is_nightly = rustversion::cfg!(nightly);
+    if !cfg.probe_rustc_version(1, 63) || is_nightly {
         autocfg::emit("polling_no_io_safety");
     }
 }
